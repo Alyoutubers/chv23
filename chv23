@@ -1,0 +1,13 @@
+# Configuration du webhook Discord
+$WebhookURL = "TON_URL_DE_WEBHOOK"
+
+# Message à envoyer
+$Message = "Client connecté sur le PC !"
+
+# Création du payload JSON
+$Payload = @{
+    content = $Message
+} | ConvertTo-Json
+
+# Envoi du message via le webhook
+Invoke-RestMethod -Uri $WebhookURL -Method Post -ContentType "application/json" -Body $Payload
