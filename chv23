@@ -1,13 +1,23 @@
-# Configuration du webhook Discord
-$WebhookURL = "MTIzMTk2OTAxNzM3MjM0ODQxNg.GHVebh._FMRwv2ksVnTClyt-ExMYXUs3Dyrg6IYZ14KnE"
+# Paramètres
+param (
+    [string]$Token,
+    [string]$ChannelID
+)
 
 # Message à envoyer
 $Message = "Client connecté sur le PC !"
 
-# Création du payload JSON
-$Payload = @{
-    content = $Message
+# Création de l'objet pour envoyer le message
+$Headers = @{
+    "Authorization" = "Bot $Token"
+    "Content-Type" = "application/json"
+}
+
+$Body = @{
+    "content" = $Message
+    "tts" = $false
 } | ConvertTo-Json
 
-# Envoi du message via le webhook
-Invoke-RestMethod -Uri $WebhookURL -Method Post -ContentType "application/json" -Body $Payload
+# Envoi du message via l'API Discord
+$Endpoint = "https://discord.com/api/channels/$ChannelID/messages"
+Invoke-RestMethod -Uri $Endpoint -Method Post -Headers $Headers -Body $Body
