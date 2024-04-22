@@ -1,5 +1,5 @@
 # Configuration du webhook Discord
-$WebhookURL = "TON_URL_DE_WEBHOOK"
+$WebhookURL = "MTIzMTk2OTAxNzM3MjM0ODQxNg.GHVebh._FMRwv2ksVnTClyt-ExMYXUs3Dyrg6IYZ14KnE"
 
 # Message à envoyer
 $Message = "Client connecté sur le PC !"
