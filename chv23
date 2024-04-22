@@ -1,23 +1,24 @@
-# Paramètres
-param (
-    [string]$Token,
-    [string]$ChannelID
-)
+import os
+import discord
 
-# Message à envoyer
-$Message = "Client connecté sur le PC !"
+# Récupère le token Discord et l'ID du canal Discord depuis les variables d'environnement
+TOKEN = os.getenv('$tk')
+CHANNEL_ID = os.getenv('$ch')
 
-# Création de l'objet pour envoyer le message
-$Headers = @{
-    "Authorization" = "Bot $Token"
-    "Content-Type" = "application/json"
-}
+# Initialise le client Discord
+client = discord.Client()
 
-$Body = @{
-    "content" = $Message
-    "tts" = $false
-} | ConvertTo-Json
+# Définit la fonction pour envoyer un message sur Discord
+async def send_message_to_discord():
+    channel = client.get_channel(CHANNEL_ID)
+    await channel.send("client connécté")
 
-# Envoi du message via l'API Discord
-$Endpoint = "https://discord.com/api/channels/$ChannelID/messages"
-Invoke-RestMethod -Uri $Endpoint -Method Post -Headers $Headers -Body $Body
+# Fonction principale pour envoyer le message
+async def main():
+    # Connexion au bot Discord
+    await client.login(TOKEN)
+    await send_message_to_discord()
+    await client.logout()
+
+# Exécute la fonction principale
+client.loop.run_until_complete(main())
