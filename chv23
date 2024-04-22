@@ -1,5 +1,3 @@
-import discord
-
 # Récupère le token Discord et l'ID du canal Discord depuis le script Discord C2
 token = "$tk"  # Remplace ça par le token de ton bot Discord
 chan = "$ch"  # Remplace ça par l'ID du canal Discord où tu veux envoyer le message
